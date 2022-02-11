@@ -19,7 +19,7 @@
         };
         devShell = mkShell {
           packages = [
-            rust-bin.stable.latest.default
+            (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
             sqlx-cli
             cargo-make
             packages.sqldef
