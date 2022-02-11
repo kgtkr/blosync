@@ -2,12 +2,16 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { self, nixpkgs, flake-utils, rust-overlay, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
       in
       with pkgs; rec {
         packages = {
@@ -15,7 +19,7 @@
         };
         devShell = mkShell {
           packages = [
-            cargo
+            rust-bin.stable.latest.default
             sqlx-cli
             cargo-make
             packages.sqldef
@@ -24,6 +28,8 @@
             darwin.apple_sdk.frameworks.SystemConfiguration
             darwin.apple_sdk.frameworks.CoreFoundation
             darwin.apple_sdk.frameworks.Security
+          ] ++ lib.optionals stdenv.isLinux [
+            openssl
           ];
         };
       }
