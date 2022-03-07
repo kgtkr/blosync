@@ -22,6 +22,7 @@
             (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
             sqlx-cli
             cargo-make
+            cargo-watch
             packages.sqldef
           ] ++ lib.optionals stdenv.isDarwin [
             libiconv

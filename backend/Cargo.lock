@@ -409,6 +409,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "blosync-backend"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "env_logger",
+ "juniper",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "sqlx",
+]
+
+[[package]]
 name = "brotli"
 version = "3.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2436,19 +2449,6 @@ dependencies = [
  "thiserror",
  "tokio 0.2.25",
  "trust-dns-proto",
-]
-
-[[package]]
-name = "blosync-backend"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "env_logger",
- "juniper",
- "serde",
- "serde_derive",
- "serde_json",
- "sqlx",
 ]
 
 [[package]]

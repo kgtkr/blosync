@@ -12,3 +12,7 @@ psqldef -f ./schema.sql -f $current_schema | sed '/_sqlx_migrations/,/);/d' | ta
 rm $current_schema
 sqlx migrate run
 """
+
+[tasks.build-watch]
+args = ["watch", "-x", "build"]
+command = "cargo"
